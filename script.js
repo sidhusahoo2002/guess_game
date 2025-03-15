@@ -1,6 +1,6 @@
 let randomNumber;
 let attempts;
-const maxAttempts = 5; // Maximum number of attempts allowed
+const maxAttempts = 10; // Maximum number of attempts allowed
 
 // Initialize the game
 function startGame() {
@@ -40,27 +40,33 @@ function checkGuess() {
         feedback.style.color = "blue";
         guessInput.value = ""; // Clear input field on wrong guess
     } else {
-        feedback.textContent = `🎉 Correct! You guessed it in ${attempts} attempt${attempts > 1 ? "s" : ""}.`;
+        feedback.textContent = `🎉 Correct! You guessed it in ${attempts} attempt${attempts > 1 ? "s" : ""}. Restarting...`;
         feedback.style.color = "green";
 
         // Lock input and button after correct guess
         guessInput.disabled = true;
         document.getElementById("submitButton").disabled = true;
+
+        // Auto-restart game after 5 seconds
+        setTimeout(startGame, 5000);
     }
 
     // Check if the player has used all attempts
     if (attempts >= maxAttempts && guess !== randomNumber) {
-        feedback.textContent = "😢 You are a loser! The correct number was " + randomNumber + ".";
+        feedback.textContent = `😢 You are a loser! The correct number was ${randomNumber}. Restarting...`;
         feedback.style.color = "red";
         guessInput.disabled = true;
         document.getElementById("submitButton").disabled = true;
+
+        // Auto-restart game after 5 seconds
+        setTimeout(startGame, 5000);
     }
 
     // Update attempts left
     attemptsText.textContent = `Attempts left: ${remainingAttempts > 0 ? remainingAttempts : 0}`;
 }
 
-// Restart the game
+// Restart the game manually
 function resetGame() {
     startGame(); // Restart with a new number
 }
