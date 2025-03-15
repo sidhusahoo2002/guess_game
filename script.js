@@ -1,6 +1,6 @@
 let randomNumber;
 let attempts;
-const maxAttempts = 10; // Maximum number of attempts allowed
+const maxAttempts = 5; // Maximum number of attempts allowed
 
 // Initialize the game
 function startGame() {
